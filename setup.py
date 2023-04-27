@@ -12,7 +12,7 @@ def read(fname):
 
 
 setup(
-    name='temp-discovery',
+    name='bigiq-discovery',
     long_description=long_description,
     long_description_content_type='text/markdown',
     setuptools_git_versioning={
