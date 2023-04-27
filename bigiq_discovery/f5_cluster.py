@@ -42,8 +42,8 @@ class F5Cluster:
         Return what should be labels
         :return:
         """
-        labels = {'product': self.product, 'version': self.version, 'clustered': self.clustered,
-                  'virtual': self.virtual}
+        labels = {'product': self.product, 'version': self.version, 'clustered': str(self.clustered).lower(),
+                  'virtual': str(self.virtual).lower()}
 
         return labels
 
