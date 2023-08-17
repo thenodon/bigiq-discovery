@@ -22,7 +22,13 @@ from typing import Dict, List, Any, Tuple
 import ipaddress
 
 
+def meta_label_name(name: str) -> str:
+    return f"{F5Cluster.meta_label_prefix}{name}"
+
+
 class F5Cluster:
+    meta_label_prefix = '__meta_bigip_'
+
     def __init__(self, hostname: str, group_name: str):
         self.hostname: str = hostname
         self.group_name: str = group_name
@@ -42,8 +48,10 @@ class F5Cluster:
         Return what should be labels
         :return:
         """
-        labels = {'product': self.product, 'version': self.version, 'clustered': str(self.clustered).lower(),
-                  'virtual': str(self.virtual).lower()}
+        labels = {meta_label_name('product'): self.product,
+                  meta_label_name('version'): self.version,
+                  meta_label_name('clustered'): str(self.clustered).lower(),
+                  meta_label_name('virtual'): str(self.virtual).lower()}
 
         return labels
 

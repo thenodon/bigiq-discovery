@@ -4,9 +4,12 @@
 biqiq-discovery a Prometheus service discovery for F5 BigIQ management platform 
 ------------------------
 # Overview
+biqiq-discovery is a Prometheus service discovery for F5 devices managed through BigIQ management platform.
+
+# Labels naming (since 0.2.0)
+All labels are returned prefixed as `__meta_bigip_`
 
 # Configuration
-
 
 Example:
 
@@ -78,6 +81,23 @@ Example using the discovery with blackbox exporter
         password: bar
 
   relabel_configs:
+    - source_labels:
+      - __meta_bigip_platform
+      action: replace
+      target_label: product
+    - source_labels:
+        - __meta_bigip_version
+      action: replace
+      target_label: version
+    - source_labels:
+        - __meta_bigip_clustered
+      action: replace
+      target_label: clustered
+    - source_labels:
+        - __meta_bigip_virtual
+      action: replace
+      target_label: virtual
+
     - source_labels: [ __address__ ]
       regex: '(.+):.*'
       target_label: __param_target
